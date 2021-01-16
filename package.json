@@ -1,0 +1,20 @@
+{
+  "name": "vue-3-recaptcha-2",
+  "version": "1.0.0",
+  "description": "Vue v3 component for Google reCAPTCHA v2",
+  "main": "index.js",
+  "type": "module",
+  "author": "Dmitry Sergienko (https://www.codefirst.co.uk/)",
+  "homepage": "https://github.com/bbonch/vue-3-recaptcha-2",
+  "license": "ISC",
+  "keywords": [
+    "vue",
+    "component",
+    "vue-component",
+    "google-recaptcha",
+    "recaptcha"
+  ],
+  "peerDependencies": {
+    "vue": "^3.0.5"
+  }
+}
