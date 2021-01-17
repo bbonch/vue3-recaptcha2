@@ -1,5 +1,5 @@
 {
-  "name": "vue-3-recaptcha-2",
+  "name": "vue3-recaptcha2",
   "version": "1.0.0",
   "description": "Vue v3 component for Google reCAPTCHA v2",
   "main": "index.js",
