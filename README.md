@@ -7,12 +7,12 @@
 	</g>
 </svg>
 </p>
-<h1 align="center">vue-3-recaptcha-2</h1>
+<h1 align="center">vue3-recaptcha2</h1>
 <p align="center">Vue v3 component for Google reCAPTCHA v2</p>
 
 ## Installation
 ``` bash
-npm install vue-3-recaptcha-2
+npm install vue3-recaptcha2
 ```
 
 ## Example usage
@@ -25,7 +25,7 @@ npm install vue-3-recaptcha-2
 
 <script>
 ...
-import VueRecaptcha from 'vue-3-recaptcha-2';
+import VueRecaptcha from 'vue3-recaptcha2';
 
 export default {
   ...,
