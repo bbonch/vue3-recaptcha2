@@ -18,28 +18,67 @@ npm install vue3-recaptcha2
 ## Example usage
 ``` vue
 <template>
-  ...
-  <vue-recaptcha site-key="..." :show="show" size="normal" theme="light" @verify="verifyRecaptcha"></vue-recaptcha>
-  ...
+  <vue-recaptcha siteKey="..." 
+				 :show="show" 
+				 size="normal" 
+				 theme="light"
+				 :tabindex="0"
+				 @verify="recaptchaVerified"
+				 @expire="recaptchaExpired"
+				 @fail="recaptchaFailed"
+				 ref="vueRecaptcha">
+  </vue-recaptcha>
 </template>
 
 <script>
-...
-import VueRecaptcha from 'vue3-recaptcha2';
+import vueRecaptcha from 'vue3-recaptcha2';
 
 export default {
-  ...,
+  name: 'app',
   components: {
-    VueRecaptcha
+	vueRecaptcha
   },
   data() {
-    return { show: false }
+	return { show: false }
   },
   methods: {
-    verifyRecaptcha(response) {
-    }
-  },
-  ...
+    recaptchaVerified(response) {
+    },
+	recaptchaExpired() {
+	  this.$refs.vueRecaptcha.reset();
+	},
+	recaptchaFailed() {
+	}
+  }
 };
 </script>
 ```
+
+## API ##
+
+### Props ###
+
+- sitekey (required)
+  Your sitekey
+- show (optional)
+  Whether to show it on load
+- size (optional)
+  The size of the widget
+- theme (optional)
+  The color theme of the widget
+- tabindex (optional)
+  The tabindex of the widget and challenge. If other elements in your page use tabindex, it should be set to make user navigation easier
+
+### Methods ###
+
+- reset
+  Resets the reCAPTCHA widget
+
+### Events ###
+
+- verify(response)
+  The name of your callback function, executed when the user submits a successful response. The g-recaptcha-response token is passed to your callback
+- expire
+  The name of your callback function, executed when the reCAPTCHA response expires and the user needs to re-verify
+- fail
+  The name of your callback function, executed when reCAPTCHA encounters an error (usually network connectivity) and cannot continue until connectivity is restored. If you specify a function here, you are responsible for informing the user that they should retry

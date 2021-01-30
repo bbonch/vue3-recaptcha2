@@ -1,5 +1,10 @@
 export default {
-    name: "VueRecaptcha",
+    name: "vueRecaptcha",
+    data() {
+        return {
+            recaptcha: null
+        }
+    },
     props: {
         siteKey: {
             type: String,
@@ -19,6 +24,11 @@ export default {
             type: Boolean,
             required: false,
             default: true
+        },
+        show: {
+            type: Number,
+            required: false,
+            default: 0
         }
     },
     emits: {
@@ -27,16 +37,24 @@ export default {
                 return true;
             else
                 return false;
-        }
+        },
+        expire: null,
+        fail: null
     },
     methods: {
         renderRecaptcha() {
-            grecaptcha.render(this.$refs.recaptcha, {
+            this.recaptcha = grecaptcha.render(this.$refs.recaptcha, {
                 'sitekey': this.siteKey,
                 'theme': this.theme,
                 'size': this.size,
-                'callback': (response) => this.$emit("verify", response)
+                'tabindex': this.tabindex,
+                'callback': (response) => this.$emit("verify", response),
+                'expired-callback': () => this.$emit("expire"),
+                'error-callback': () => this.$emit("fail")
             });
+        },
+        reset() {
+            grecaptcha.reset(this.recaptcha);
         }
     },
     beforeMount() {
