@@ -19,14 +19,14 @@ npm install vue3-recaptcha2
 ``` vue
 <template>
   <vue-recaptcha siteKey="..." 
-				 :show="show" 
-				 size="normal" 
-				 theme="light"
-				 :tabindex="0"
-				 @verify="recaptchaVerified"
-				 @expire="recaptchaExpired"
-				 @fail="recaptchaFailed"
-				 ref="vueRecaptcha">
+		 :show="show" 
+		 size="normal" 
+		 theme="light"
+		 :tabindex="0"
+		 @verify="recaptchaVerified"
+		 @expire="recaptchaExpired"
+		 @fail="recaptchaFailed"
+		 ref="vueRecaptcha">
   </vue-recaptcha>
 </template>
 
@@ -42,8 +42,8 @@ export default {
 	return { show: false }
   },
   methods: {
-    recaptchaVerified(response) {
-    },
+	recaptchaVerified(response) {
+	},
 	recaptchaExpired() {
 	  this.$refs.vueRecaptcha.reset();
 	},
