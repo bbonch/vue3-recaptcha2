@@ -18,8 +18,7 @@ npm install vue3-recaptcha2
 ## Example usage
 ``` vue
 <template>
-  <vue-recaptcha siteKey="..." 
-		 :show="show" 
+  <vue-recaptcha v-if="showRecaptcha" siteKey="..."
 		 size="normal" 
 		 theme="light"
 		 :tabindex="0"
@@ -39,7 +38,7 @@ export default {
 	vueRecaptcha
   },
   data() {
-	return { show: false }
+	return { showRecaptcha: true }
   },
   methods: {
 	recaptchaVerified(response) {
@@ -60,8 +59,6 @@ export default {
 
 - sitekey (required)
   Your sitekey
-- show (optional)
-  Whether to show it on load
 - size (optional)
   The size of the widget
 - theme (optional)

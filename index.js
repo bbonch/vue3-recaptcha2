@@ -1,3 +1,5 @@
+import { h } from 'vue'
+
 export default {
     name: "vueRecaptcha",
     data() {
@@ -19,16 +21,6 @@ export default {
             type: String,
             required: false,
             default: "light"
-        },
-        show: {
-            type: Boolean,
-            required: false,
-            default: true
-        },
-        show: {
-            type: Number,
-            required: false,
-            default: 0
         }
     },
     emits: {
@@ -57,7 +49,7 @@ export default {
             grecaptcha.reset(this.recaptcha);
         }
     },
-    beforeMount() {
+    mounted() {
         if (window.grecaptcha == null) {
             new Promise((resolve) => {
                 window.recaptchaReady = function () {
@@ -78,5 +70,9 @@ export default {
             this.renderRecaptcha();
         }
     },
-    template: "<div v-show='show' ref='recaptcha'></div>"
+    render() {
+        return h('div', {
+            ref: 'recaptcha'
+        }, {})
+    }
 }
