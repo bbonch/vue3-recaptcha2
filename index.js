@@ -45,6 +45,9 @@ export default {
                 'error-callback': () => this.$emit("fail")
             });
         },
+        execute() {
+            grecaptcha.execute(this.recaptcha);
+        },
         reset() {
             grecaptcha.reset(this.recaptcha);
         }
