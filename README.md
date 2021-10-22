@@ -70,6 +70,8 @@ export default {
 
 - reset
   Resets the reCAPTCHA widget
+- execute
+  Programmatically invoke the challenge
 
 ### Events ###
 
