@@ -18,10 +18,10 @@ npm install vue3-recaptcha2
 ## Example usage
 ``` vue
 <template>
-  <vue-recaptcha v-if="showRecaptcha" siteKey="..."
+  <vue-recaptcha v-show="showRecaptcha" siteKey="..."
 		 size="normal" 
 		 theme="light"
-		 :tabindex="0"
+		 hl="tr"
 		 @verify="recaptchaVerified"
 		 @expire="recaptchaExpired"
 		 @fail="recaptchaFailed"
@@ -38,7 +38,7 @@ export default {
 	vueRecaptcha
   },
   data() {
-	return { showRecaptcha: true }
+	return { showRecaptcha: false }
   },
   methods: {
 	recaptchaVerified(response) {
@@ -63,8 +63,8 @@ export default {
   The size of the widget
 - theme (optional)
   The color theme of the widget
-- tabindex (optional)
-  The tabindex of the widget and challenge. If other elements in your page use tabindex, it should be set to make user navigation easier
+- hl (optional)
+  Forces the widget to render in a specific language. Auto-detects the user's language if unspecified.
 
 ### Methods ###
 
