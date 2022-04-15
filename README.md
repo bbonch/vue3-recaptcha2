@@ -16,9 +16,23 @@ npm install vue3-recaptcha2
 ```
 
 ## Example usage
+
+### With bundlers
+
+package.js
+``` json
+{
+  "devDependencies": {
+    "vue": "3.2.31",
+    "vue3-recaptcha2": "1.5.0"
+  }
+}
+```
+
+Vue component
 ``` vue
 <template>
-  <vue-recaptcha v-show="showRecaptcha" sitekey="..."
+  <vue-recaptcha v-show="showRecaptcha" sitekey="key"
 		 size="normal" 
 		 theme="light"
 		 hl="tr"
@@ -50,6 +64,42 @@ export default {
 	}
   }
 };
+</script>
+```
+
+### With CDN
+
+``` html
+<div id="app">
+    <button v-on:click="toggle">Show</button>
+    <vue-recaptcha v-if="show" :sitekey="recaptchaSiteKey" v-on:verify="recaptchaUpdated" hl="ru"></vue-recaptcha>
+</div>
+
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/vue3-recaptcha2"></script>
+<script>
+	const app = Vue.createApp({
+	    name: "app",
+	    components: {
+		VueRecaptcha
+	    },
+	    data() {
+		return {
+		    show: false,
+		    recaptcha: null,
+		    recaptchaSiteKey: 'key'
+		}
+	    },
+	    methods: {
+		toggle() {
+		    this.show = !this.show;
+		},
+		recaptchaUpdated(recaptcha) {
+		    this.recaptcha = recaptcha;
+		}
+	    }
+	});
+	app.mount("#app");
 </script>
 ```
 
