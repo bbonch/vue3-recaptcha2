@@ -4,14 +4,14 @@
 
 <script>
     export default {
-        name: "vueRecaptcha",
+        name: "VueRecaptcha",
         data() {
             return {
                 recaptcha: null
             }
         },
         props: {
-            siteKey: {
+            sitekey: {
                 type: String,
                 required: true
             },
@@ -42,8 +42,8 @@
         },
         methods: {
             renderRecaptcha() {
-                this.recaptcha = grecaptcha.render(this.$refs.recaptcha, {
-                    'sitekey': this.siteKey,
+                this.recaptcha = grecaptcha.render(this.$refs.recaptcha ?? this.$el, {
+                    'sitekey': this.sitekey,
                     'theme': this.theme,
                     'size': this.size,
                     'callback': (response) => this.$emit("verify", response),

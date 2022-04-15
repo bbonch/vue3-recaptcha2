@@ -18,7 +18,7 @@ npm install vue3-recaptcha2
 ## Example usage
 ``` vue
 <template>
-  <vue-recaptcha v-show="showRecaptcha" siteKey="..."
+  <vue-recaptcha v-show="showRecaptcha" sitekey="..."
 		 size="normal" 
 		 theme="light"
 		 hl="tr"

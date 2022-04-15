@@ -1,12 +1,33 @@
 {
   "name": "vue3-recaptcha2",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Vue v3 component for Google reCAPTCHA v2",
-  "main": "index.js",
-  "type": "module",
-  "author": "Dmitry Sergienko (https://www.codefirst.co.uk/)",
+  "main": "./dist/vue3-recaptcha2.umd.js",
+  "browser": "./dist/vue3-recaptcha2.umd.js",
+  "unpkg": "./dist/vue3-recaptcha2.umd.js",
+  "jsdelivr": "./dist/vue3-recaptcha2.umd.js",
+  "module": "./dist/vue3-recaptcha2.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue3-recaptcha2.esm.js",
+      "require": "./dist/vue3-recaptcha2.umd.js"
+    }
+  },
+  "sideEffects": false,
+  "author": "Dmitry Sergienko (https://www.codefirst.co.uk)",
   "homepage": "https://github.com/bbonch/vue3-recaptcha2",
   "license": "ISC",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-replace": "^2.4.2",
+    "@vue/compiler-sfc": "^3.2.31",
+    "rollup": "^2.52.8",
+    "rollup-plugin-vue": "^6.0.0"
+  },
   "keywords": [
     "vue",
     "component",
