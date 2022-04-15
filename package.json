@@ -18,6 +18,7 @@
   "homepage": "https://github.com/bbonch/vue3-recaptcha2",
   "license": "ISC",
   "scripts": {
+    "prepublish": "npm run build",
     "build": "rollup -c"
   },
   "devDependencies": {
