@@ -10,8 +10,12 @@ export default [
         output: {
             name: 'VueRecaptcha',
             file: pkg.browser,
-            format: 'umd'
+            format: 'umd',
+            globals: {
+                vue: 'Vue'
+            }
         },
+        external: ['vue'],
         plugins: [
             replace({
                 'process.env.NODE_ENV': JSON.stringify('production')
@@ -24,9 +28,10 @@ export default [
     {
         input: 'src/index.js',
         external: ['vue'],
-        output: [
-            { file: pkg.module, format: 'es' }
-        ],
+        output: {
+            file: pkg.module,
+            format: 'es'
+        },
         plugins: [
             vue()
         ]

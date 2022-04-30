@@ -1,6 +1,6 @@
 {
   "name": "vue3-recaptcha2",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Vue v3 component for Google reCAPTCHA v2",
   "main": "./dist/vue3-recaptcha2.umd.js",
   "browser": "./dist/vue3-recaptcha2.umd.js",
@@ -25,7 +25,7 @@
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-replace": "^2.4.2",
-    "@vue/compiler-sfc": "^3.2.31",
+    "@vue/compiler-sfc": "^3.2.33",
     "rollup": "^2.52.8",
     "rollup-plugin-vue": "^6.0.0"
   },
