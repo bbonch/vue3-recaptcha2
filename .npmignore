@@ -1,3 +1,4 @@
 src
-rollup.config.js
+vite.config.js
+tsconfig.json
 .vs

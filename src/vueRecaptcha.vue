@@ -2,11 +2,11 @@
     <div ref="recaptchaDiv"></div>
 </template>
 
-<script setup>
+<script setup lang="ts">
     import { ref, onMounted } from 'vue'
 
     const recaptchaDiv = ref(null)
-    let recaptcha = null
+    let recaptcha: any = null
 
     const props = defineProps({
         sitekey: {
@@ -30,8 +30,8 @@
     })
 
     const emit = defineEmits({
-        verify: (response) => {
-            if (response)
+        verify: (response: string) => {
+            if (response != null && response != "")
                 return true;
             else
                 return false;
@@ -54,7 +54,7 @@
             'sitekey': props.sitekey,
             'theme': props.theme,
             'size': props.size,
-            'callback': (response) => emit("verify", response),
+            'callback': (response: string) => emit("verify", response),
             'expired-callback': () => emit("expire"),
             'error-callback': () => emit("fail")
         })
@@ -62,7 +62,7 @@
 
     onMounted(() => {
         if (window.grecaptcha == null) {
-            new Promise((resolve) => {
+            new Promise<void>((resolve) => {
                 window.recaptchaReady = function () {
                     resolve();
                 };
