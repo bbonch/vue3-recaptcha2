@@ -19,17 +19,6 @@ npm install vue3-recaptcha2
 
 ### With bundlers
 
-package.js
-``` json
-{
-  "devDependencies": {
-    "vue": "3.2.31",
-    "vue3-recaptcha2": "1.5.0"
-  }
-}
-```
-
-Vue component
 ``` vue
 <template>
   <vue-recaptcha v-show="showRecaptcha" sitekey="key"
