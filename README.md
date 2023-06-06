@@ -25,9 +25,11 @@ npm install vue3-recaptcha2
 		 size="normal" 
 		 theme="light"
 		 hl="tr"
+		 :loading-timeout="loadingTimeout"
 		 @verify="recaptchaVerified"
 		 @expire="recaptchaExpired"
 		 @fail="recaptchaFailed"
+		 @error="recaptchaError"
 		 ref="vueRecaptcha">
   </vue-recaptcha>
 </template>
@@ -41,7 +43,10 @@ export default {
 	vueRecaptcha
   },
   data() {
-	return { showRecaptcha: false }
+	return {
+		showRecaptcha: false,
+		loadingTimeout: 30000 // 30 seconds
+	}
   },
   methods: {
 	recaptchaVerified(response) {
@@ -50,6 +55,8 @@ export default {
 	  this.$refs.vueRecaptcha.reset();
 	},
 	recaptchaFailed() {
+	},
+	recaptchaError(reason) {
 	}
   }
 };
@@ -104,6 +111,8 @@ export default {
   The color theme of the widget
 - hl (optional)
   Forces the widget to render in a specific language. Auto-detects the user's language if unspecified.
+- loading-timeout (optional)
+  Milliseconds to wait for widget to load before triggering a timeout error. Defaults to 0 (i.e. never timeout).
 
 ### Methods ###
 
@@ -120,3 +129,5 @@ export default {
   The name of your callback function, executed when the reCAPTCHA response expires and the user needs to re-verify
 - fail
   The name of your callback function, executed when reCAPTCHA encounters an error (usually network connectivity) and cannot continue until connectivity is restored. If you specify a function here, you are responsible for informing the user that they should retry
+- error
+  The name of your callback function, executed when reCAPTCHA fails to load. If you specify a function here, you are responsible for either reloading (e.g. by unmounting / re-mounting the component) or notifying the user that they should reload / retry

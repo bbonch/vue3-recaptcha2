@@ -26,6 +26,11 @@
         hl: {
             type: String,
             required: false
+        },
+        loadingTimeout: {
+            type: Number,
+            required: false,
+            default: 0
         }
     })
 
@@ -36,6 +41,7 @@
             else
                 return false;
         },
+        error: (reason: any) => reason,
         expire: null,
         fail: null
     })
@@ -62,19 +68,41 @@
 
     onMounted(() => {
         if (window.grecaptcha == null) {
-            new Promise<void>((resolve) => {
+            new Promise<void>((resolve, reject) => {
+                let loadingCountdown: ReturnType<typeof setTimeout>;
+                let responded = false;
+
                 window.recaptchaReady = function () {
+                    if (responded) return;
+                    responded = true;
+                    clearTimeout(loadingCountdown);
                     resolve();
                 };
 
-                const doc = window.document;
                 const scriptId = "recaptcha-script";
+                const loadingFailed = (reason: string) => {
+                    return () => {
+                        if (responded) return;
+                        responded = true;
+                        clearTimeout(loadingCountdown);
+                        document.getElementById(scriptId)?.remove();
+                        reject(reason);
+                    }
+                };
+
+                if (props.loadingTimeout > 0) loadingCountdown = setTimeout(loadingFailed("timeout"), props.loadingTimeout);
+
+                const doc = window.document;
                 const scriptTag = doc.createElement("script");
                 scriptTag.id = scriptId;
-                scriptTag.setAttribute("src", `https://www.google.com/recaptcha/api.js?onload=recaptchaReady&render=explicit&hl=${props.hl}`);
+                scriptTag.onerror = loadingFailed("error");
+                scriptTag.onabort = loadingFailed("aborted");
+                scriptTag.setAttribute("src", `https://www.google.com/recaptcha/api.js?onload=recaptchaReady&render=explicit&hl=${props.hl}&_=${+new Date()}`);
                 doc.head.appendChild(scriptTag);
             }).then(() => {
                 renderRecaptcha();
+            }).catch((err) => {
+                emit("error", err);
             });
         }
         else {
