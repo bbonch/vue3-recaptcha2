@@ -26,5 +26,6 @@ describe("test component", () => {
         expect(props.hl).toBe(undefined)
         expect(props.theme).toBe("light")
         expect(props.size).toBe("normal")
+        expect(props.loadingTimeout).toBe(0)
     })
 })
