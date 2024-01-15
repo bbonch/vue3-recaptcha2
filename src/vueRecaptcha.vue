@@ -13,6 +13,13 @@
             type: String,
             required: true
         },
+        //In some specific regions, Google's recaptcha will not load.
+        // We need to replace the link with a specific link to support the specific region.
+        region: {
+        type: String,
+        required: false,
+        default: "global"
+        },
         size: {
             type: String,
             required: false,
@@ -91,14 +98,18 @@
                 };
 
                 if (props.loadingTimeout > 0) loadingCountdown = setTimeout(loadingFailed("timeout"), props.loadingTimeout);
-
                 const doc = window.document;
                 const scriptTag = doc.createElement("script");
                 scriptTag.id = scriptId;
                 scriptTag.onerror = loadingFailed("error");
                 scriptTag.onabort = loadingFailed("aborted");
-                scriptTag.setAttribute("src", `https://www.google.com/recaptcha/api.js?onload=recaptchaReady&render=explicit&hl=${props.hl}&_=${+new Date()}`);
-                doc.head.appendChild(scriptTag);
+
+                const recaptchaUrl = props.region === "china"
+                    ? `https://recaptcha.net/recaptcha/api.js?onload=recaptchaReady&render=explicit&hl=${props.hl}&_=${+new Date()}`
+                    : `https://www.google.com/recaptcha/api.js?onload=recaptchaReady&render=explicit&hl=${props.hl}&_=${+new Date()}`;
+
+                scriptTag.setAttribute("src", recaptchaUrl);
+doc.head.appendChild(scriptTag);
             }).then(() => {
                 renderRecaptcha();
             }).catch((err) => {
